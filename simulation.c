@@ -49,9 +49,27 @@ real real_F(real t, real T) {
     return (real_P_in()-real_P_out(t, T))*(1/100);
 }
 
+//INTÉGRATION TEMPORELLE//
+
 int main(int argc, char **argv)
 {
+    real real_euler(real t_final, int steps){
+
+
+    FILE * fp; 
+    fp = fopen("output.dat","w");
+    const real h = (t_final-t0)/steps;
+    real T, t = T0, t0;
+
+    for (int i=0; i < steps; i++){
+        T = T + h * real_F(t, T);
+        t = t+h;
+        fprintf(fp, "%f %f ", T, t);
+
+        fclose(fp);
+    };
     printf("Simple climate simulation\n");
+    real_euler(100, 5);
 
     return 0;
-}
+}}
